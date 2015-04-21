@@ -1,0 +1,19 @@
+{
+  "name": "onsen-routing",
+  "version": "0.0.1",
+  "description": "Onsen UI with routing",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/argelius/onsen-routing"
+  },
+  "author": "Andreas Argelius <andreas@argeli.us> (http://argeli.us/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/argelius/onsen-routing/issues"
+  },
+  "homepage": "https://github.com/argelius/onsen-routing"
+}

@@ -1,0 +1,87 @@
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Onsen UI with routing</title>
+  <script src="bower_components/angular/angular.js" type="text/javascript" charset="utf-8"></script>
+  <script src="bower_components/angular-ui-router/release/angular-ui-router.js" type="text/javascript" charset="utf-8"></script>
+  <script src="bower_components/onsenui/build/js/onsenui.js" type="text/javascript" charset="utf-8"></script>
+
+  <link rel="stylesheet" href="bower_components/onsenui/build/css/onsen-css-components.css" type="text/css" />
+  <link rel="stylesheet" href="bower_components/onsenui/build/css/onsenui.css" type="text/css" />
+
+  <script>
+    ons.bootstrap(['ui.router'])
+
+    .config(function($stateProvider, $urlRouterProvider) {
+      $urlRouterProvider.otherwise('/home');
+
+
+      $stateProvider
+        .state('home', {
+          url: '/home',
+          onEnter: function($rootScope) {
+            $rootScope.tabbar.setActiveTab(0);
+          }
+        })
+        .state('settings', {
+          url: '/settings',
+          onEnter: function($rootScope) {
+            console.log("settings");
+            $rootScope.tabbar.setActiveTab(1);
+          }
+        })
+        .state('settings.advanced', {
+          url: '/advanced',
+          onEnter: function($rootScope) {
+            setImmediate(function() {
+              $rootScope.navi.pushPage('advancedSettings.html');
+            });
+          },
+          onExit: function($rootScope) {
+            $rootScope.navi.popPage();
+          }
+        });
+    });
+  </script>
+</head>
+<body>
+  <ons-tabbar var="tabbar">
+    <ons-tab page="home.html" ui-sref="home" icon="ion-home" label="Home" active="true"></ons-tab>
+    <ons-tab page="settings.html" ui-sref="settings" icon="ion-gear-a" label="Settings"></ons-tab>
+  </ons-tabbar>
+
+  <ons-template id="home.html">
+    <ons-toolbar>
+      <div class="center">Home</div>
+    </ons-toolbar>
+
+    <p style="text-align: center;"><a ui-sref="settings">Go to settings</a></p>
+    <p style="text-align: center;"><a ui-sref="settings.advanced">Go to advanced settings</a></p>
+  </ons-template>
+
+  <ons-template id="settings.html">
+    <ons-navigator var="navi">
+      <ons-toolbar>
+        <div class="center">Settings</div>
+      </ons-toolbar>
+
+      <div style="text-align: center;">
+        <p><a ui-sref="home">Go to home</a></p>
+        <p><a ui-sref="settings.advanced">Advanced settings</a></p>
+      </div>
+    </ons-navigator>
+  </ons-template>
+
+  <ons-template id="advancedSettings.html">
+    <ons-toolbar>
+      <div class="center">Advanced settings</div>
+    </ons-toolbar>
+
+    <div style="text-align: center;">
+      <p><a ui-sref="home">Go to home</a></p>
+      <p><a ui-sref="settings">Basic settings</a></p>
+    </div>
+  </ons-template>
+</body>
+</html>
