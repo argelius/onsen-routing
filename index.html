@@ -39,7 +39,12 @@
             });
           },
           onExit: function($rootScope) {
-            $rootScope.navi.popPage();
+            try {
+              $rootScope.navi.popPage();
+            }
+            catch {
+              console.log("Couldn't pop!");
+            }
           }
         });
     });
